@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+//리터럴(상수): 데이터의 값을 표현하는 방식
+//종류:숫자 리터럴, 문자열 리터럴, 배열 리터럴, 객체 리터럴, 함수 리터럴, 불리언 리터럴, 그리고 undefined와 null 리터럴
+
+//#1 . 숫자 리터럴 : Infinity, NaN를 포함한 모든 숫자 데이터는 typeof가 "number" 반환 
+//Infinity(isFinite()로 구별), NaN(isNaN())
+var val1 = 10;
+document.writeln("val1: " + val1 + "<br/>");
+document.writeln("typeof val1: " + typeof val1 + "<br/>");  //number
+document.writeln("isFinite(val1): " + isFinite(val1) + "<br/>"); //true
+document.writeln("isNaN(val1): " + isNaN(val1) + "<br/>"); //flase
+document.writeln('<br/>');
+
+var val2 = 1/0;
+document.writeln("val2: " + val2 + "<br/>"); //Infinity
+document.writeln("typeof val2: " + typeof val2 + "<br/>");  //number
+document.writeln("isFinite(val2): " + isFinite(val2) + "<br/>"); //flase
+document.writeln("isNaN(val2): " + isNaN(val2) + "<br/>"); //flase
+document.writeln('<br/>');
+
+
+var val3 = 5 * "4times"
+document.writeln("val3: " + val3 + "<br/>"); //NaN
+document.writeln("typeof val3: " + typeof val3 + "<br/>");  //number
+document.writeln("isFinite(val3): " + isFinite(val3) + "<br/>"); //flase
+document.writeln("isNaN(val3): " + isNaN(val3) + "<br/>"); //true
+document.writeln('<br/>');
+
+document.writeln('-----------------------------<br/>');
+
+
+//#2. 문자열 리터럴 : 이스케이프 시퀀스- \0, \b, \t, \", \'
+//유니코드 문자 사용 
+var str1 = '문자열 리터럴';
+      var str2 = '작은따옴표로 만든 문자열에는 큰따옴표(")를 포함할 수 있습니다.';
+      var str3 = "큰따옴표로 만든 문자열에는 작은따옴표(')를 포함할 수 있습니다.";
+      
+      document.writeln(str1 + '<br/>');
+      document.writeln('<br/>');
+      document.writeln(str2 + '<br/>');
+      document.writeln(str3 + '<br/>');
+      document.writeln('<br/>');
+      
+      var str4 = '작은따옴표로 만든 문자열에 \\\'를 통해 작은따옴표(\')를 포함할 수 있습니다.';
+      var str5 = "큰따옴표로 만든 문자열에 \\\"를 통해 큰따옴표(\")를 포함할 수 있습니다.";
+      var str6 = '이 문자열은 줄바꿈을 통해 첫번째 행을 출력하고,\n이어 두번째 행을 출력합니다.';
+      var str7 = '원주율 \u03c0는 원의 둘레와 지름의 비율입니다.';
+      
+      document.writeln(str4 + '<br/>');
+      document.writeln(str5 + '<br/>');
+      document.writeln(str6 + '<br/>');
+      document.writeln(str7 + '<br/>');
+      document.writeln('<br/>');
+
+
+
+document.writeln('-----------------------------<br/>');
+
+//#3. 배열: 데이터 값들의 모음 
+      var arr =[]
+      document.writeln('arr1[0]: ' + arr1[0] + '<br/>');            // arr1[0]: undefined
+      document.writeln('arr1[1]: ' + arr1[1] + '<br/>');            // arr1[1]: undefined
+      document.writeln('arr1[2]: ' + arr1[2] + '<br/>');            // arr1[2]: undefined
+      document.writeln('arr1[3]: ' + arr1[3] + '<br/>');            // arr1[3]: undefined
+      document.writeln('arr1.length: ' + arr1.length + '<br/>');    // arr1.length: 0
+      document.writeln('<br/>');
+
+      arr1[0] = 95;
+      arr1[2] = 100;
+      document.writeln('arr1[0]: ' + arr1[0] + '<br/>');            // arr1[0]: 95
+      document.writeln('arr1[1]: ' + arr1[1] + '<br/>');            // arr1[1]: undefined
+      document.writeln('arr1[2]: ' + arr1[2] + '<br/>');            // arr1[2]: 100
+      document.writeln('arr1[3]: ' + arr1[3] + '<br/>');            // arr1[3]: undefined
+      document.writeln('arr1.length: ' + arr1.length + '<br/>');    // arr1.length: 3 
+      document.writeln('<br/>');
+      
+     //일차원 배열 
+      var arr2 = [ '홍길동', '이순신', '강감찬' ];
+      
+      document.writeln('arr2[0]: ' + arr2[0] + '<br/>');            // arr2[0]: 홍길동
+      document.writeln('arr2[1]: ' + arr2[1] + '<br/>');            // arr2[1]: 이순신
+      document.writeln('arr2[2]: ' + arr2[2] + '<br/>');            // arr2[2]: 강감찬
+      document.writeln('arr2[3]: ' + arr2[3] + '<br/>');            // arr2[3]: undefined
+      document.writeln('arr2.length: ' + arr2.length + '<br/>');    // arr2.length: 3
+      document.writeln('<br/>');
+      
+    //이차원 배열 
+    var arr2d = [ 
+        ['을지문덕', '연개소문'], 
+        ['광개토대왕', '세종대왕'], 
+        ['김유신', '계백'] 
+      ];
+      
+      document.writeln('arr2d[0]: ' + arr2d[0] + '<br/>');          // arr2d[0]: 을지문덕, 연개소문
+      document.writeln('arr2d[1]: ' + arr2d[1] + '<br/>');          // arr2d[1]: 광개토대왕, 세종대왕
+      document.writeln('arr2d[2]: ' + arr2d[2] + '<br/>');          // arr2d[2]: 김유신, 계백
+      document.writeln('arr2d[3]: ' + arr2d[3] + '<br/>');          // arr2d[3]: undefined
+      document.writeln('arr2d.length: ' + arr2d.length + '<br/>');  // arr2d.length: 3
+      document.writeln('<br/>');
+      
+      document.writeln('arr2d[0][0]: ' + arr2d[0][0] + '<br/>');          // arr2d[0][0]: 을지문덕
+      document.writeln('arr2d[0][1]: ' + arr2d[0][1] + '<br/>');          // arr2d[0][1]: 연개소문
+      document.writeln('arr2d[0].length: ' + arr2d[0].length + '<br/>');  // arr2d[0].length: 2
+      document.writeln('arr2d[1][0]: ' + arr2d[1][0] + '<br/>');          // arr2d[1][0]: 광개토대왕
+      document.writeln('arr2d[1][1]: ' + arr2d[1][1] + '<br/>');          // arr2d[1][1]: 세종대왕
+      document.writeln('arr2d[1].length: ' + arr2d[1].length + '<br/>');  // arr2d[1].length: 2
+      document.writeln('arr2d[2][0]: ' + arr2d[2][0] + '<br/>');          // arr2d[2][0]: 김유신
+      document.writeln('arr2d[2][1]: ' + arr2d[2][1] + '<br/>');          // arr2d[2][1]: 계백
+      document.writeln('arr2d[2].length: ' + arr2d[2].length + '<br/>');  // arr2d[2].length: 2
+      document.writeln('arr2d[3][0]: ' + arr2d[3][0] + '<br/>');          // arr2d[3]이 undefined이므로 에러 발생    
+      document.writeln('<br/>');
+
+      document.writeln('-----------------------------<br/>');
+      
+//#4. 객체: 이름이 붙어 있는 데이터 값들의 모음 
+//1) 프로퍼티: 이름이 붙어 있는 값
+//2) 메소드 : 함수가 프로퍼티에 저장될 경우 프로퍼티 명이 메소드 명이됨 
+
+
+
+//#5. 함수 리터럴: function(a, b){ return a+b;}
+// 만일 반환 값이 없는 return문이나 return문이 없으면 undefined
+
+
+
+//#6. 불리언 리터럴 :
+//산술연산: true(1), flase(0)
+//문자열 : true, flase
+//논리연산: 0, undefined, null, NaN은 flase
+
+
+//#7. undefined & null
+//1) undefined
+// 논리연산: flase, 산술연산: NaN, 문자열 연산 : "undefined"
+//2) null
+//논리 연산: false, 산술 연산: 0으로, 문자열 연산 “null”로 변환되 
+
+
+
+    </script>
+  </body>
+</html>
