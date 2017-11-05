@@ -1,0 +1,26 @@
+<html lang="ko">
+    <head>
+      <meta charset="utf-8" />
+      <title>02-02</title>
+    </head>
+    <body>
+      <script type="text/javascript">
+
+//변수(동적): 데이터를 저장하는 메모리 공간 
+// 변수 선언 시 초기값을 지정하지 않으면 값을 저장할 때까지 undefined 
+//동적:저장되는 값에 따라 변수의 데이터 타입이 바뀜.
+
+var val1;
+var val2 = 12;
+
+document.writeln("val1: " + val1+ "<br/>");  //undefined
+document.writeln("val1 typeof :" + typeof val1+ "<br/>");  //undefined
+document.writeln("val2: " + val2+ "<br/>");  //12
+document.writeln("val2 typeof :" + typeof val2+ "<br/>");  //number
+val2 = "javascript";
+document.writeln("val2: " + val2+ "<br/>");  
+document.writeln("val2 typeof :" + typeof val2+ "<br/>"); //string
+
+</script>
+  </body>
+</html>
