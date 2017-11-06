@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>03-03</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+   //#3. 예외 처리  
+  //예외란? 예외적인 상황이나 에러가 발생했음을 나타내는 객체 
+  //자바스크립트에서 예외 발생하면 인터프리터는 실행 중단하고 가장 가까운 예외처리기로 처리를 넘김 
+  //throw 문을 통해 명시적 예외를 발생시킬 수 있음  throw new Error(‘에러메시지');
+  // *try(정상처리 코드)~ catch(예외가 발생할 경우에만 실행/ throw로 다시 예외 발생 가능 ) ~ finally(무조건 실행) : 예외처리는 catch 절을사용해작성
+  //  try~ catch ~ finally 가 없으면 예외가 전파되며 어떤 처리기도 찾지 못하면 에러 취급  
+
+
+     var x = 5;
+     var result;
+    
+     try{
+        document.writeln('1. <br/>');
+        result = x * y;   // y는 정의되어 있지 얺은 변수이므로 런타임에서 에러가 발생합니다.  
+        document.writeln('2.' + result + '<br/>'); //실행 안됨 예외처리기로 감 
+     }catch(e){
+      document.writeln('3. ' + e + '<br/>');
+     }finally {         // funally 블록은 예외 발생과 상관없이 무조건 수행됩니다.
+        document.writeln('4. <br/>');        
+      }
+
+      document.writeln('<br/>');
+
+
+      // throw로 명시적 예외 발생시킴 
+      try {
+        document.writeln('1 <br/>');
+        result = x / 0;  
+        document.writeln('2 ' + result + '<br/>');
+        throw new Error('0으로 나눌 수 없습니다.');  // 예외 객체를 만들어 던집니다. 
+      } catch (e) {       // try 블록에서 발생한 에러에 대한 예외를 catch 블록에서 처리합니다.
+        document.writeln('3 ' + e + '<br/>');
+      } finally {         // funally 블록은 예외 발생과 상관없이 무조건 수행됩니다.
+        document.writeln('4 <br/>');        
+      }
+
+
+
+   
+    </script>
+  </body>
+</html>
