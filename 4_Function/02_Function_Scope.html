@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script type="text/javascript">
+   //# 02. 함수 스코프 & 전역 스코프 
+   //스코프란? 코드에서 변수를 참조할 수 있는 유효 범위 (js에서는 {} 스코프가 존재하지 않음)
+   //스코프 종류: 1) 전역 스코프 2) 지역스코프 
+   //함수의 매개변수: 지역스코프 , 함수를 호출하면 그 값을 전달 받음.
+   //전역변수 값을 매개변수로 전달할 때, 그 값은 지역스코프의 매개변수로 복사함
+  //(전달 값이 기본형인 경우 전역변수와 매개변수는 상호 독립적인 값/ 참조형은 동일한 객체 참조 )
+
+
+
+  //1) 전역 스코프와 지역 스코프
+
+  var x = 'global x';
+  var y = 'global y';
+
+  function func(){
+    var x = 'local x';
+ // var 키워드 없을 경우 전역스코프에 접근해 동일 이름을 가진 전역변수를 사용하며,
+// 만일 동일 이름의 전역 변수가 없을 경우 전역변수를 새로 등록합니다.
+    y= '???';
+
+    document.writeln('x: ' + x + '<br/>');
+    document.writeln('y: ' + y + '<br/>'); 
+    document.writeln('<br/>'); 
+  }
+
+      document.writeln('func() 호출 전<br/>');
+      document.writeln('x: ' + x + '<br/>');
+      document.writeln('y: ' + y + '<br/>');
+      document.writeln('<br/>');
+      
+      document.writeln('func() 호출<br/>');
+      func();
+      
+      document.writeln('func() 호출 후<br/>');
+      document.writeln('x: ' + x + '<br/>');
+      document.writeln('y: ' + y + '<br/>');   
+      document.writeln('<br/>');
+
+
+
+  //2) 함수의 매개변수와 스코프
+  //case1 . 기본형을 매개변수로 전달하는 경우: 원본값에 영향을 안줌
+  function swapByValue(x, y){
+    var temp = x; 
+    x = y;
+    y = temp;
+  }
+
+
+  //case2. 참조형을 매개변수로 전달하는 경우: 원본에 영향을 줌 
+  function swapByReference(o){
+    var temp = o.x;
+    o.x = o.y;
+    o.y = temp;
+  }
+
+      var a = 5;
+      var b = 8;
+      var obj = { x : 5, y : 8};
+      
+      document.writeln('swap 함수 호출 전<br/>');
+      document.writeln('a: ' + a + ', b: ' + b + '<br/>');
+      document.writeln('obj.x: ' + obj.x + ', obj.y: ' + obj.y + '<br/>');
+      document.writeln('<br/>');
+      
+      swapByValue(a, b);
+      swapByReference(obj);
+      
+      document.writeln('swap 함수 호출 후<br/>');
+      document.writeln('a: ' + a + ', b: ' + b + '<br/>');
+      document.writeln('obj.x: ' + obj.x + ', obj.y: ' + obj.y + '<br/>');
+      document.writeln('<br/>');
+
+    </script>
+  </body>
+</html>
