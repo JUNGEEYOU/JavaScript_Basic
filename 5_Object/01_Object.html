@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+    //#01. 객체의 정의 및 정의 방법
+    // 1) 객체: 이름과 값으로 구성된 프로퍼티 집합, 모든 객체는 Objet 생성자 함수를 상속하며, 상속받은 프로퍼티와 메소드 있음
+    // 2) 정의방방법: 객체 리터럴 사용 
+    // 생성자(new Object()): 객체 만들고 그 객체에 프로퍼티 추가 
+    //생성자로 객체 정의하는방법 : 
+    //생성자 함수의 역할은 객체를 초기화할 뿐 다른 역할은 하지 않음 ,return문 사용 안함 , 첫 문자 대문자 
+    //this키워드로 객체 초기화 (생략 못함), new 연산자는 생성자 함수 호출하여 인자를 전달함 
+
+
+// 생성자 함수 : this를 통해 객체 초기호 ㅏ
+function Rectangle(x, y, w, h) {
+        this.pointX = x;
+        this.pointY = y;   
+        this.width = w;
+        this.height = h;
+        this.toString = function() {
+          return 'Rectangle : { pointX : ' + this.pointX + ', pointY : ' + this.pointY 
+                 + ', width : ' + this.width + ', height : ' + this.height + ' }'; 
+        };
+        
+        // 생성자 함수는 return 문을 만들지 않습니다.
+      }
+      // new 연산자는  아무런 프로퍼티도 정의되어 있지 않은 비어있는 객체를 생성합니다. 
+      // 객체 생성 이후 new 연산자는 지정된 생성자 함수를 호출하여 명시된 인자들을 전달하고 
+      // 방금 생성돤 새로운 객체에 대한 참조를 생성자 함수 내의 this 키워드를 통해 전달합니다.
+      // 생성자 함수는 이 this 키워드와 전달된 인자 값들을 사용하여 새로운 객체를 초기화합니다.
+      var rect1 = new Rectangle(100, 120, 20, 30);
+      var rect2 = new Rectangle(250, 300, 30, 50);
+      
+      document.writeln(rect1 + '<br/>');
+      document.writeln(rect2 + '<br/>');
+      document.writeln('<br/>');
+
+
+
+    </script>
+  </body>
+</html>
