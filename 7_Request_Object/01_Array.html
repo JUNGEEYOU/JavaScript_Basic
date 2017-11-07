@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+//#7. 내장 객체 
+//Array 객체 : 배열을 다루기 위한 객체로, 배열의 원소에 대한 추가, 삭제, 정렬 등의 조작 가능 제공
+//생성 방법: new 연산자와 생성자 함수 호출, 배열 리터럴
+//자바스크립트 배열은 크기가 자동으로 증가 
+
+var ary1 = new Array('홍길동', '이순신', '강감찬');
+var ary2 = ['이나영', '임수정', '이영애', '김혜수'];
+
+      document.writeln(ary1.concat(ary2), '<br/>'); // 홍길동,이순신,강감찬,을지문덕,광개토대왕,이나영,임수정,이영애,김혜수
+      document.writeln(ary1.join('／'), '<br/>');  // 홍길동／이순신／강감찬／을지문덕／광개토대왕
+      document.writeln(ary1.slice(1), '<br/>'); // 이순신,강감찬,을지문덕,광개토대왕
+      document.writeln(ary1.slice(1, 2), '<br/>');  // 이순신
+      document.writeln(ary1.splice(1, 2, '계백', '김유신'), '<br/>');  // 이순신,강감찬
+      document.writeln(ary1, '<br/>');  // 홍길동,계백,김유신,을지문덕,광개토대왕
+      document.writeln('<br/>');
+      document.writeln(ary1.pop(), '<br/>');  // 광개토대왕
+      document.writeln(ary1, '<br/>');  // 홍길동,계백,김유신,을지문덕
+      document.writeln(ary1.push('권율'), '<br/>'); // 5
+      document.writeln(ary1, '<br/>');  // 홍길동,계백,김유신,을지문덕,권율
+      document.writeln(ary1.shift(), '<br/>');  // 홍길동
+      document.writeln(ary1, '<br/>');  // 계백,김유신,을지문덕,권율
+      document.writeln(ary1.unshift('세종대왕', '장영실'), '<br/>'); // 6
+      document.writeln(ary1, '<br/>');  // 세종대왕,장영실,계백,김유신,을지문덕,권율
+      document.writeln('<br/>');
+      document.writeln(ary1.reverse(), '<br/>');  // 권율,을지문덕,김유신,계백,장영실,세종대왕
+      document.writeln(ary1, '<br/>');  //  권율,을지문덕,김유신,계백,장영실,세종대왕
+      document.writeln(ary1.sort(), '<br/>'); // 계백,권율,김유신,세종대왕,을지문덕,장영실
+      document.writeln(ary1, '<br/>');  // 계백,권율,김유신,세종대왕,을지문덕,장영실
+      document.writeln('<br/>');
+      document.writeln(ary1.length, '<br/>'); // 6
+      document.writeln(ary1.toString(), '<br/>'); // 계백,권율,김유신,세종대왕,을지문덕,장영실
+
+
+//String 객체 : 문자열을 위한 랩퍼(wrapper) 객체로, 문자열의 검색, 부분 문자열의 추출, 변환 등의 조작 기능을 제공
+//new 연산자와 생성자 함수 이용, 리터럴 
+
+var str1 = 'better tomorrow';
+      document.writeln(str1.indexOf('t'), '<br/>'); // 2
+      document.writeln(str1.lastIndexOf('t'), '<br/>'); // 7
+      document.writeln(str1.indexOf('t', 3), '<br/>'); // 3
+      document.writeln(str1.lastIndexOf('o', 3), '<br/>');  // -1
+      document.writeln(str1.indexOf('mo'), '<br/>');  // 9
+      document.writeln('<br/>');
+      
+      var str2 = 'JavaScript';
+      document.writeln(str2.charAt(4), '<br/>');  // s
+      document.writeln(str2.slice(5, 8), '<br/>');  // cri
+      document.writeln(str2.substring(5, 8), '<br/>');  // cri
+      document.writeln(str2.substr(5, 3), '<br/>'); // cri
+      document.writeln(str2.split('S'), '<br/>'); // Java,cript
+      document.writeln('<br/>');
+      
+      document.writeln(str2.concat('프로젝트'), '<br/>'); // JavaScript프로젝트
+      document.writeln(str2.length, '<br/>'); // 10
+      document.writeln('<br/>');
+
+
+//Number 객체: 숫자를 다루는 랩퍼 객체 
+      var num1 = 255;
+      document.writeln(num1.toString(16), '<br/>'); // ff
+      document.writeln(num1.toString(8), '<br/>');  // 377
+      document.writeln('<br/>');
+      
+      var num2 = 123.45678;
+      document.writeln(num2.toExponential(2), '<br/>'); // 1.23e+2
+      document.writeln(num2.toFixed(3), '<br/>'); // 123.457
+      document.writeln(num2.toFixed(7), '<br/>'); // 123.4567800
+      document.writeln(num2.toPrecision(10), '<br/>');  // 123.4567800
+      document.writeln(num2.toPrecision(6), '<br/>'); // 123.457
+      document.writeln('<br/>');
+
+
+
+
+    </script>
+  </body>
+</html>
