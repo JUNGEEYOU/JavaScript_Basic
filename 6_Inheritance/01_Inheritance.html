@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>상속</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      //# 01. 상속 
+      //1) 객체 생성 과정 : 1) new연산자로 빈 객체 생성 2) 생성자 함수로 this키워드를 통해 전달된 인자로 초기화
+     // 3) 새로운 객체의 prototype 프로퍼티에 생성자 함수의 prototype 프로퍼티 값이 전달되어 객체와 생성자 함수는 동일한 프로토타입 객체 를 참조하게 됩니다.
+      //this가 가리키는 객체 반환 
+
+
+      var Car = function(){};
+      Car.prototype = {
+        startEngine : function(){ 
+          document.writeln('시동을 겁니다...<br/>'); 
+        },
+        accelerate : function(){ 
+          document.writeln('속도를 올립니다...<br/>'); 
+        },
+        decelerate : function(){ 
+          document.writeln('속도를 줄입니다...<br/>'); 
+        },
+        stopEngine : function(){ 
+          document.writeln('시동을 끕니다...<br/>'); 
+        }
+      };
+
+      var K5 = function(){};
+//Car() 생성자 함수의 프로토타입 멤버를 상속
+      K5.prototype = new Car();
+
+      K5.prototype.startNavigation = function(){ 
+        document.writeln('네비게이션 안내를 시작합니다...<br/>'); 
+      };
+      K5.prototype.stopNavigation = function(){ 
+        document.writeln('네비게이션 안내를 종료합니다...<br/>'); 
+      };
+
+
+      var k5 = new K5();
+      k5.startEngine();
+      k5.startNavigation();
+      k5.decelerate(); 
+      k5.stopNavigation();
+      k5.stopEngine();
+      
+      document.writeln('<br/>');
+
+      //2) 프로토타입 체인과 프로토타입 맴버 상속: 자바스크립트는 프로토타입 기반의 상속 메커니즘 제공
+      //객체를 생성하면 생성자 함수의 프로토타입 객체 맴버를 상속
+      //객체의 생성자 함수의 프로토타입객체와 Object() 생성자함수의 프로토타입객체가 연결 되어 있음
+      //프로토타입 체인 : 객체를 거쳐 프로토타입 객체로 맴버를 검색할수 있는 것
+      //> 맴버 검색 순서: 개체를 대상으로 > 프로토 타입 객체 > Object 생성자 함수의 프로토타입 객체까지 검색
+
+// 객체 멤버 상속을 위해 Function() 생성자의 메소드 apply()와 call()을 사용해 구현하는  생성자 체이닝
+
+
+      var Car = function(f){
+        this.fuel = f;
+        this.velocity = 0;
+        this.isDriving = false;
+      };
+
+
+//메소드 
+      Car.prototype = {
+        startEngine : function(){
+          this.isDriving = true; 
+          this.fuel -= 5;
+          document.writeln('Car: 시동을 겁니다... (isDriving: ' + this.isDriving + ', fuel: ' + this.fuel + ')<br/>'); 
+        },
+        accelerate : function(){ 
+          this.velocity += 5;
+          this.fuel -= 5;
+          document.writeln('Car: 속도를 올립니다++++ (velocity: ' + this.velocity + ', fuel: ' + this.fuel + ')<br/>'); 
+        },
+        decelerate : function(){ 
+          this.velocity -= 5;
+          this.fuel -= 1;
+          document.writeln('Car: 속도를 줄입니다---- (velocity: ' + this.velocity + ', fuel: ' + this.fuel + ')<br/>'); 
+        },
+        stopEngine : function(){
+          this.isDriving = false;
+          this.fuel -= 5; 
+          document.writeln('Car: 시동을 끕니다... (isDriving: ' + this.isDriving + ', fuel: ' + this.fuel + ')<br/>'); 
+        }
+      };
+
+
+      var K5 = function(f,m){
+        Car.apply(this, [f]); //객체 멤버 상속 
+        this.model = m;
+      };
+
+      //상속 
+      K5.prototype = new Car();
+      K5.prototype.constructor = K5; //car를 k5바꿈
+      //삭제이유: 객체 멤버 상속으로 복사된것을 삭제
+      //k5생성자 함수 내에만 프로퍼티가 있으면 됨 
+      delete K5.prototype.fuel;
+      delete K5.prototype.velocity;
+      delete K5.prototype.isDriving;
+      
+      K5.prototype.accelerate = function(){ 
+        this.velocity += 10;
+        this.fuel -= 5;
+        document.writeln('K5 ' + this.model + ': 속도를 올립니다++++ (velocity: ' + this.velocity + ', fuel: ' + this.fuel + ')<br/>');  
+      };
+      
+      //오버라이딩 
+      K5.prototype.decelerate = function(){ 
+        this.velocity -= 10;
+        this.fuel -= 1;
+        document.writeln('K5 ' + this.model + ': 속도를 줄입니다---- (velocity: ' + this.velocity + ', fuel: ' + this.fuel + ')<br/>');
+      };
+      
+      K5.prototype.startNavigation = function(){ 
+        document.writeln('K5 ' + this.model + ': 네비게이션 안내를 시작합니다...<br/>');
+      };
+      
+      K5.prototype.stopNavigation = function(){ 
+        document.writeln('K5 ' + this.model + ': 네비게이션 안내를 종료합니다...<br/>'); 
+      };
+
+      var k5 = new K5(1000, '2013년형');
+      document.writeln('>>> k5.fuel: ' + k5.fuel + '<br/>');
+      k5.startEngine();
+      document.writeln('>>> k5.fuel: ' + k5.fuel + '<br/>');
+      k5.startNavigation();
+      for (var i = 0; i < 5; i++)
+        k5.accelerate();
+        document.writeln('>>> k5.fuel: ' + k5.fuel + '<br/>');
+      for (var i = 0; i < 5; i++)
+        k5.decelerate(); 
+        document.writeln('>>> k5.fuel: ' + k5.fuel + '<br/>');
+      k5.stopNavigation();
+      document.writeln('>>> k5.fuel: ' + k5.fuel + '<br/>');
+      k5.stopEngine();
+      document.writeln('>>> k5.fuel: ' + k5.fuel + '<br/>');
+      
+      document.writeln('<br/>');
+
+
+
+     
+
+
+
+
+
+
+      //3) 객체의 타입 검사(js는 약한 타입이라 신경):  typeof 연 산자, instanceof 연산자, constructor 프로퍼티, toString() 메소드
+
+      function checkType(obj) {
+        // 먼저 null일 경우 문자열 'null'을 반환합니다.
+        if (obj == null)
+          return 'null';
+        
+        // 제일 먼저 typeof 연산자를 이용해 문자열을 취합니다.
+        var type = typeof obj;
+        
+        // typeof의 반환 값이 'object'이 아닐 경우 type 값을 반환합니다.
+        if (type != 'object')
+          return type;
+        
+        // obj.toString()의 결과를 str 변수에 저장합니다.
+        var str = Object.prototype.toString.call(obj);
+        
+        // 생성자 이름을 추출합니다.
+        var constructor = str.substring(8, str.length - 1);
+        
+        // 'Object'일 경우엔 constructor 프로퍼티까지 조사할 필요가 있습니다.    
+        if (constructor != 'Object')
+          return constructor;
+        
+        // 실제 Object 타입일 경우 constructor 값을 반환합니다. 
+        if (obj.constructor == Object)
+          return constructor;  
+        
+        // 사용자 정의 객체의 생성자 함수의 프로토타입 객체에 정의해 놓은 constructorname 
+        // 프로퍼티가  있으면 constructorname을 반환합니다.
+        if ('constructorname' in obj.constructor.prototype)
+            return obj.constructor.prototype.constructorname;
+        
+        return '객체의 타입을 알 수 없습니다.';      
+      }
+      
+      var Parent = function() {};
+      Parent.prototype.constructorname = 'Parent';
+      
+      var Child = function() {};
+      Child.prototype = new Parent();
+      Child.prototype.constructor = Child;
+      Child.prototype.constructorname = 'Child';
+      
+      var child = new Child();
+      
+      document.writeln('typeof Parent: ' + typeof Parent + ' <br/>');  //function
+      document.writeln('typeof Child: ' + typeof Child + ' <br/>'); // function
+      document.writeln('typeof child: ' + typeof child + ' <br/>');  //obj
+      document.writeln('child instanceof Object: ' + (child instanceof Object) + ' <br/>'); //true
+      document.writeln('child instanceof Parent: ' + (child instanceof Parent) + ' <br/>');//true
+      document.writeln('child instanceof Child: ' + (child instanceof Child) + ' <br/>');//true
+      document.writeln('child.constructor === Object: ' + (child.constructor === Object) + ' <br/>');
+      document.writeln('child.constructor === Parent: ' + (child.constructor === Parent) + ' <br/>');
+      document.writeln('child.constructor === Child: ' + (child.constructor === Child) + ' <br/>'); //true
+      document.writeln('<br/>');
+      
+      document.writeln('checkType(child): ' + checkType(child) + ' <br/>');// child
+      
+
+      
+    </script>
+
+  <body>
+ 
+</html>
