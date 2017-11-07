@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+  
+    //05.constuctor 속성 : 모든 객체는 생성자 함수를 참조하는 construtor 프로퍼티가 있음 
+    //constructor 프로퍼티를이용해 객체의 타입을 판단할수있으며,객체생성도 가능
+    function Rectangle(x, y, w, h) {
+        this.pointX = x;
+        this.pointY = y;   
+        this.width = w;
+        this.height = h;
+      }
+      
+      Rectangle.prototype.toString = function() {
+        return 'Rectangle : { pointX : ' + this.pointX + ', pointY : ' + this.pointY 
+               + ', width : ' + this.width + ', height : ' + this.height + ' }'; 
+      };
+      
+      Rectangle.prototype.area = function() {
+        return this.width * this.height;
+      };
+      
+      var rect1 = new Rectangle(100, 120, 20, 30);
+      
+      if (rect1.constructor == Rectangle)
+        document.writeln('rect1 객체의 생성자 함수는 Rectangle입니다.<br/>');
+      
+      if (rect1.constructor.prototype == Rectangle.prototype)
+        document.writeln('rect1 객체의 생성자 함수의 프로토타입 객체는 Rectangle 생성자함수의 프로토타입 객체와 동일합니다.<br/>');
+      
+      var rect2 = new rect1.constructor(250, 300, 30, 50);
+      document.writeln('rect2: ' + rect2 + '<br/>');
+      document.writeln('<br/>');
+    </script>
+  </body>
+</html>
