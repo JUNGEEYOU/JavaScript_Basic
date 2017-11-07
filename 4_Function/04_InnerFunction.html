@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script type="text/javascript">
+   // # 04. 중첩함수 
+   //자바스크립트는 함수 안에 함수 정의될 수 있음 > 중첩함수 
+   //중첩함수: 함수 내에서만 호출할 수 있고, 외부에서는 직접 호출 못함
+   //이런 특징으로  특정함수에서만 필요한 기능을 외부로 누출시키지 않고 구현 가능, 함수 내부 변수에 접근 가능
+   //> 객체지향의 정보은닉 특징 구현 
+
+      function circle(radius){
+        var pi = 3.14;
+        
+        function area(r){  //중첩함수는 내부 변수에 접근가능 
+          return r * r * pi;
+        }
+        //중첩함수는 내부에서만 호출 가능 
+          return area(radius);
+      }
+      document.writeln('circle(5): ' + circle(5) + '<br/>');
+      document.writeln('<br/>');
+
+   //#05. 스코프 체인 :
+            // 1. 전역 레벨의 파싱 결과 전역객체에 프로퍼티 x와 outer가 정의됩니다.
+       
+            var x = '전역 객체에 등록되어 있는 x 프로퍼티 값';
+      
+      function outer() {
+        var y = 'outer 함수의 호출 객체에 등록되어 있는 y 프로퍼티 값';
+        
+
+        //이너함수는 outer함수와 연결되어 있고, outer는 전역과 연결되 있어 모두 접근 가능 
+        function inner() {
+          var z = 'inner 함수의 호출 객체에 등록되어 있는 z 프로퍼티 값';
+          document.writeln('x: ' + x + '<br/>');
+          document.writeln('y: ' + y + '<br/>');
+          document.writeln('z: ' + z + '<br/>');
+        } 
+        
+        // 3. 함수 레벨의 파싱 결과 inner 함수에 대한 호출 객체에 arguments 프로퍼티가 초기화되고, 
+        //    프로퍼티 z가 정의되고,
+        //    outer 함수의 호출 객체와 inner 함수의 호출 객체 간에 스코프 체인이 연결되고,
+        //    inner 함수의 코드를 실행합니다.
+        //    이 때 x는 전역객체에, y는 outer 함수의 호출객체에, z는 inner 함수의 호출객체에 접근해서
+        //    그 값을 취합니다. 
+        inner();        
+         
+      }
+      
+      // 2. 함수 레벨의 파싱 결과 outer 함수에 대한 호출 객체에 arguments 프로퍼티가 초기화되고, 
+      //    프로퍼티 y와  inner가 정의되고,
+      //    전역객체와 outer 함수의 호출 객체 간에 스코프 체인이 연결된 후,
+      //    outer 함수의 코드를 실행합니다.
+      outer(); 
+      
+      document.writeln('<br/>');
+
+
+
+
+   //#06. 콜백함수 : 직접 호출하는 함수가 아닌 어떤 특정 시점에서 조건을 만족했을 때 호출될수 있도록 라이브러리 함수으ㅟ 인자로 전달되는 함수 
+
+      function main(){
+        var arry =[];
+
+        for(var i =0; i< 10; i++){
+          arry[i] = Math.ceil(Math.random() *45);
+        }
+        work(arry, even, odd);
+      }
+     // 콜백함수 even은 짝수가 발견될 때마다 호출될 함수로 당시의 배열 인덱스와 원소를 출력합니다.
+     function even(idx, num) {
+        document.writeln((idx + 1) + '번째 데이터는 짝수 ' + num + '입니다.<br/>');
+      }
+      
+      // 콜백함수 odd는 홀수가 발견될 때마다 호출될 함수로 당시의 배열 인덱스와 원소를 출력합니다.
+      function odd(idx, num) {
+        document.writeln((idx + 1) + '번째 데이터는 홀수 ' + num + '입니다.<br/>');
+      }
+      
+      function work(data, callback1, callback2) {
+        for (var i = 0; i < data.length; i++) {
+          if (data[i] % 2 == 0)
+            callback1(i, data[i]);
+          else
+            callback2(i, data[i]);
+        }
+      }
+      
+      // main 함수를 실행합니다.
+      main();
+
+
+
+
+   //#7. 함수 클로저
+   //클로저? 스코프 체인 > 정보은닉(private) 
+  //Private 속성은 객체의 외부에서는 접근 할 수 없는 외부에 감춰진 속성이나 메소드를 의미한다. 
+  
+  function makeId() {
+        var lastId = 0;
+        
+        return function() { return ++lastId; };
+      }
+      var id = makeId();
+      document.writeln('id: ' + id() + '<br/>');
+      document.writeln('id: ' + id() + '<br/>');
+      document.writeln('id: ' + id() + '<br/>');
+      document.writeln('id: ' + id() + '<br/>');
+      document.writeln('id: ' + id() + '<br/>');
+      document.writeln('<br/>');
+
+    </script>
+  </body>
+</html>
