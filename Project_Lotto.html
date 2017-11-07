@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      // consturctor 프로퍼티
+      
+      function Lotto(numbers, balls) {
+        this.numbers = numbers;
+        this.balls = balls;
+        this.luckyNumbers = [];
+      }
+
+      //호출을 통해 번호 
+      Lotto.prototype.getLuckyNumbers = function(){
+     
+          for(var i = 0 ; i<this.balls ; i++){
+            var ball = Math.floor(Math.random() * this.numbers) + 1;
+
+              if(this.luckyNumbers.indexOf(ball) == -1 ){
+                  this.luckyNumbers.push(ball);
+              }
+          }
+          return this.luckyNumbers;
+
+      };
+
+      var lotto = new Lotto(45, 6);
+  
+      document.writeln(lotto.getLuckyNumbers());
+      
+   
+    </script>
+  </body>
+</html>
